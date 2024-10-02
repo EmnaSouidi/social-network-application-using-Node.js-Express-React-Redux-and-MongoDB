@@ -10,7 +10,7 @@ const ProfileSchema = new Schema({
     handle : {
         type: String,
         required: true,
-        maw: 40
+        max: 40
     },
     company :{
         type: String
@@ -47,6 +47,10 @@ const ProfileSchema = new Schema({
         },
         location: {
             type: String,
+            
+        },
+        from: {
+            type: Date,
             required: true
         },
         to: {
@@ -56,6 +60,9 @@ const ProfileSchema = new Schema({
         current:{
             type: Boolean,
             default: false
+        },
+        description: {
+            type: String,
         }
 
     }
@@ -81,7 +88,11 @@ const ProfileSchema = new Schema({
         current:{
             type: Boolean,
             default: false
+        },
+        description: {
+            type: String,
         }
+
 
     }
    ],
