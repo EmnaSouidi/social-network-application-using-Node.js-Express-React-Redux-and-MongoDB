@@ -10,8 +10,9 @@ const Profile = require('../../models/Profile');
 //validation
 const validatePostInput= require('../../validation/post');
 
-
-
+//@route GET api/posts/test
+//@desc GET post route
+//@access Public
 router.get('/test', (req,res)=>res.json({msg:'posts works'}));
 
 //@route GET api/posts
@@ -31,7 +32,7 @@ router.get('/', (req, res)=>{
 router.get('/:id', (req, res)=>{
     Post.findById(req.params.id)
     .then(post => res.json(post))
-    .catch(err =>res.status({nopostfound:"No post found with that ID"}));
+    .catch(err =>res.status(404).json({nopostfound:"No post found with that ID"}));
 
 });
 
@@ -41,10 +42,12 @@ router.get('/:id', (req, res)=>{
 //@desc create post
 //@access Private
 
-router.post('/', passport.authenticate('jwt', {session : false}), 
-(req, res) =>{
+router.post(
+    '/',
+     passport.authenticate('jwt', {session : false}), 
+    (req, res) =>{
     console.log(req.user);
-    const {errors, isValid}= validatePostInput(req.body);
+    const { errors, isValid }= validatePostInput(req.body);
 
     //check validation
     if (!isValid) {
@@ -58,15 +61,17 @@ router.post('/', passport.authenticate('jwt', {session : false}),
         user: req.user.id
          
     });
-    newPost.save().then(post=>res.json(post));
-})
+    newPost.save().then(post => res.json(post));
+}
+);
 
 // @route DELETE api/posts/:id
 // @desc Delete post 
 // @access Private 
 router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res)=>{
+    
     Profile.findOne({user: req.user.id})
-    .then(profile =>{
+      .then(profile =>{
         Post.findById(req.params.id)
             .then(post =>{
              //check for post owner
@@ -76,10 +81,17 @@ router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res)
     
     
 
-        //Delete
-        post.remove().then(()=> res.json({success: true}));
+        //Delete 
+        //la fonction remove() n'existe pas 
+        //deleteOne() fonctionne
+        post.deleteOne().then(()=> res.json({success: true}));
     })
-    .catch(err => res.status(404).json({postnotfound: 'No post found'}));
+    // .catch(err => res.status(404).json({postnotfound: 'No post found'}));
+    .catch(err=>{
+        console.error(err);
+        return res.status(404).json({servererror: 'No post found'});
+    })
+    
 })
 });
 module.exports = router;
