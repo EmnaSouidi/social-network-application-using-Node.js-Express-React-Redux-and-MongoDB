@@ -3,30 +3,31 @@ import React, { Component } from 'react'
 class Navbar extends Component {
   render() {
     return (
-    <nav class="navbar navbar-expanded-sm navbar-dark bg-dark mb-4">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
     <div className='container'>
       <a className='navbar-brand' href="landing.html">Devconnector</a>
-      <button className='navbar-toggler' type='button' data-toggle="collapse "
+      <button className='navbar-toggler' type='button' data-toggle="collapse"
       data-target="#mobile-nav">
         <span className='navbar-toggler-icon'></span>
       </button>
 
       <div className='collapse navbar-collapse' id="mobile-nav">
-        <ul>
-          <li className='navbar-nav mr-auto'>
+        
+          <ul className='navbar-nav mr-auto'>
             <li className='nav-item'>
               <a className='nav-link' href="profiles.html">Developers</a>
             </li>
-          </li>
-        </ul>
+          </ul>
+        
 
 
-      <ul className='navbar-nav' ml-auto>
-        <li class="nav-item">
-          <a class="nav-link" href='register.html'>Sign Up</a>
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item ">
+          <a className="nav-link" href='register.html'>Sign Up</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href='login.html'>Login</a>
+        <li className="nav-item">
+          <a className="nav-link" href='login.html'>Login</a>
+
         </li>
       </ul>
       </div>
