@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import axios from 'axios';
 class Register extends Component {
 
   constructor(){
@@ -26,7 +26,9 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     }
-    console.log(newUser);
+    axios.post('/api/users/register', newUser)
+      .then(res =>console.log(res.data))
+      .catch(err => this.state({errors: err.response.data}));
 
   }
   render() {
@@ -52,7 +54,7 @@ class Register extends Component {
               <div className="form-group">
                 <input type="password" className='form-control form-control-lg' placeholder='Confirm Password' name='password2' value={this.state.password2} onChange={this.onChange}/>
               </div>
-              <input type="submit" className='btn btn-info btn-block mt-4' value='Register'/>
+              <input type="submit" className='btn btn-info btn-block mt-4' value='Submit'/>
 
             </form>
           </div>

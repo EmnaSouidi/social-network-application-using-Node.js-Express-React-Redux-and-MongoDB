@@ -39,7 +39,7 @@ class Login extends Component {
                 <div className='form-group'>
                   <input type="password" className='form-control form-control-lg' placeholder='Password' name='password' value={this.state.password} onChange={this.onChange}/>
                 </div>
-                <input type="submit" className='btn btn-info btn-block mt-4' />
+                <input type="submit" className='btn btn-info btn-block mt-4' value="Submit"/>
               </form>
             </div>
           </div>
